@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'csv'
+
+passwords=CSV.read("pass.csv", liberal_parsing: true)
+
+passwords.each_with_index do |pass,i|
+
+  group=pass[0]
+  title=pass[1]
+  password=pass[2]
+  notes=pass[4]
+
+  if notes =~ /username:/i
+    username=notes
+    username.gsub!(/username:/i,"")
+    username=username.split("-")[0]
+
+  elsif notes =~ /login:/i
+    username=notes
+    username.gsub!(/login:/i,"")
+    username=username.split("-")[0]
+
+  elsif notes =~ /email:/i
+    username=notes
+    username.gsub!(/login:/i,"")
+    username=username.split("-")[0]
+
+  elsif notes =~ /member:/i
+    username=notes
+    username.gsub!(/member:/i,"")
+    username=username.split("-")[0]
+
+  elsif notes =~ /ssid:/i
+    username=notes
+    username.gsub!(/ssid:/i,"")
+    username=username.split("-")[0]
+  else
+    username=""
+  end
+
+  if notes =~ /url:/i
+    url=notes.split(/url:/)
+    if url.count > 0 and url[1]
+      url=url[1].split("-")[0]
+    end
+  end
+
+  puts "#{group},#{title},#{username},#{password},#{url},#{notes}"
+
+end

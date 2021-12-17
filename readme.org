@@ -1,0 +1,15 @@
+* Pass2Keepass
+
+Convert pass to a format which easily imports into keepass.
+
+
+1. Export passwords
+   : pass export a > pass.csv
+
+2. Convert csv
+   : pass2keepass pass.csv > pass_keepass.csv
+
+3. Import pass_keepass.csv in KeePassXC
+
+4. Scrub csv
+   : scrub pass.csv pass_keepass.csv
